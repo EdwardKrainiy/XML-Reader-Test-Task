@@ -1,4 +1,4 @@
-package com.epam.task.util;
+package com.epam.task.data.util;
 
 import com.epam.task.domain.GeneralProperty;
 import com.epam.task.domain.SoftwareProperty;

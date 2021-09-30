@@ -1,9 +1,8 @@
-package com.epam.task.dao.impl;
+package com.epam.task.data;
 
-import com.epam.task.dao.XmlDao;
 import com.epam.task.domain.GeneralProperty;
 import com.epam.task.domain.SoftwareProperty;
-import com.epam.task.util.FileUtils;
+import com.epam.task.data.util.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -22,13 +21,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.task.util.FileUtils.createGeneralPropertyNode;
-import static com.epam.task.util.FileUtils.getSoftwarePropertyByNode;
+import static com.epam.task.data.util.FileUtils.createGeneralPropertyNode;
+import static com.epam.task.data.util.FileUtils.getSoftwarePropertyByNode;
 
-public class XmlDaoImpl implements XmlDao {
+public class SoftwareRepository implements XmlRepository {
+    private static String fileToReadPath;
+    private static String fileToWritePath;
+
+    public SoftwareRepository() {
+    }
+
+    public SoftwareRepository(String fileToReadPath) {
+        this.fileToReadPath = fileToReadPath;
+    }
+
+    public static void setFileToWritePath(String fileToWritePath) {
+        SoftwareRepository.fileToWritePath = fileToWritePath;
+    }
+
+    public static void setFileToReadPath(String fileToReadPath) {
+        SoftwareRepository.fileToReadPath = fileToReadPath;
+    }
 
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder;
+    static DocumentBuilder builder;
 
     {
         try {
@@ -39,9 +55,9 @@ public class XmlDaoImpl implements XmlDao {
     }
 
     @Override
-    public List<SoftwareProperty> getSoftwareProperties(String path) {
+    public List<SoftwareProperty> getAll() {
         try {
-            Document document = builder.parse(FileUtils.getFileByPath(path));
+            Document document = builder.parse(FileUtils.getFileByPath(fileToReadPath));
             document.getDocumentElement().normalize();
 
             NodeList nodeList = document.getElementsByTagName("SoftwareProperty");
@@ -60,7 +76,7 @@ public class XmlDaoImpl implements XmlDao {
     }
 
     @Override
-    public Boolean writeSoftwareProperty(GeneralProperty property, String fileName) {
+    public Boolean rewrite(GeneralProperty property) {
         try {
             Document doc = builder.newDocument();
 
@@ -76,7 +92,7 @@ public class XmlDaoImpl implements XmlDao {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
 
-            StreamResult file = new StreamResult(new File("src/main/resources/" + fileName + ".xml"));
+            StreamResult file = new StreamResult(new File(fileToWritePath + ".xml"));
 
             transformer.transform(source, file);
             return true;
