@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<SoftwareProperties>
+    <SoftwareProperty>
+        <name>Program1</name>
+        <softwareType>Virus</softwareType>
+        <version>1.1</version>
+        <size>2.23</size>
+        <cost>1500</cost>
+    </SoftwareProperty>
+    <SoftwareProperty>
+        <name>Program2</name>
+        <softwareType>Commercial</softwareType>
+        <version>1.3</version>
+        <size>4.41</size>
+        <cost>3200</cost>
+    </SoftwareProperty>
+    <SoftwareProperty>
+        <name>Program3</name>
+        <softwareType>Others</softwareType>
+        <version>2.23</version>
+        <size>7.70</size>
+        <cost>3700</cost>
+    </SoftwareProperty>
+</SoftwareProperties>
