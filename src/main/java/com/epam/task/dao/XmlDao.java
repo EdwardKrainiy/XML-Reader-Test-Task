@@ -6,6 +6,6 @@ import com.epam.task.domain.SoftwareProperty;
 import java.util.List;
 
 public interface XmlDao {
-    List<SoftwareProperty> getSoftwareProperties(String path);
-    Boolean writeSoftwareProperties(GeneralProperty property);
+    List<SoftwareProperty> getSoftwareProperties(String path) throws Exception;
+    Boolean writeSoftwareProperty(GeneralProperty property, String fileName);
 }
