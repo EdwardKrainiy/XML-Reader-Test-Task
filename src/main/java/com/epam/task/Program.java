@@ -36,8 +36,12 @@ public class Program {
 
         String fileToWriteName = bf.readLine();
 
-        if(GeneralPropertyService.rewriteGeneralPropertyToFile(GeneralPropertyService.obtainGeneralProperty(softwareProperties), fileToWriteName)){
+        try{
+            GeneralPropertyService.rewriteGeneralPropertyToFile(GeneralPropertyService.obtainGeneralProperty(softwareProperties), fileToWriteName);
             System.out.println("Succeed!");
+        }
+        catch (Exception exception){
+            System.out.println(exception.getMessage());
         }
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 public interface XmlRepository {
 
     List<SoftwareProperty> getAll() throws Exception;
-    Boolean rewrite(GeneralProperty property);
+    void rewrite(GeneralProperty property);
 }

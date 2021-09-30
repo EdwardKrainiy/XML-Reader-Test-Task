@@ -31,10 +31,6 @@ public class SoftwareRepository implements XmlRepository {
     public SoftwareRepository() {
     }
 
-    public SoftwareRepository(String fileToReadPath) {
-        this.fileToReadPath = fileToReadPath;
-    }
-
     public static void setFileToWritePath(String fileToWritePath) {
         SoftwareRepository.fileToWritePath = fileToWritePath;
     }
@@ -69,14 +65,14 @@ public class SoftwareRepository implements XmlRepository {
             }
             return softwareProperties;
 
-        } catch (SAXException | IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return null;
         }
     }
 
     @Override
-    public Boolean rewrite(GeneralProperty property) {
+    public void rewrite(GeneralProperty property) {
         try {
             Document doc = builder.newDocument();
 
@@ -95,11 +91,9 @@ public class SoftwareRepository implements XmlRepository {
             StreamResult file = new StreamResult(new File(fileToWritePath + ".xml"));
 
             transformer.transform(source, file);
-            return true;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
         }
     }
 }
