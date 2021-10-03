@@ -83,6 +83,7 @@ public class SoftwareRepository implements XmlRepository {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
 
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
 
             StreamResult file = new StreamResult(new File(fileToWritePath + ".xml"));
