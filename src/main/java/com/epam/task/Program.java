@@ -23,7 +23,7 @@ public class Program {
         try{
              softwareProperties = SoftwarePropertyService.getAllSoftwareProperties(ServiceDefaults.filesPath + fileToReadName + ".xml");
         }
-        catch (Exception exception){
+        catch (IOException exception){
             System.out.println(exception.getMessage());
         }
 
